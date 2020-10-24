@@ -7,6 +7,7 @@ const express = require('express')
 const models = require('../../mongo');
 
 
+
 const buildRouter = () => {
   var router = express.Router()
 
@@ -40,9 +41,20 @@ const buildRouter = () => {
   // CREATE
   router.post('/:entity', (req, res) => {
     const Entity = models[req.params.entity];
-    const newEntity = new Entity({name: req.body.name});
+    const newEntity = new Entity(req.body);
     return newEntity.save().then((result) => {
-      res.send(result);
+      
+      if(req.params.entity === 'Edition'){
+        models.Course.findById(result.courseId).then((course) => {
+          console.log(course);
+          course.editions.push(result._id);
+          course.save();
+          res.send(result);
+        })
+      }else{
+        res.send(result);
+      }
+
     }).catch((err) => {
       res.status(500).send({error: err})
     });

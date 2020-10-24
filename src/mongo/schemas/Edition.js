@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
-  name: String,
   code: String,
-  active: Boolean,
-  description: String,
   startDate: Date,
-  endDate: Date
+  endDate: Date,
+  courseId : mongoose.Schema.Types.ObjectId
 });
+
 
 const Edition = mongoose.model('Edition', schema);
 

@@ -5,6 +5,7 @@ const schema = new mongoose.Schema({
   code: String,
   active: Boolean,
   description: String,
+  editions: [mongoose.Schema.Types.ObjectId]
 });
 
 const Course = mongoose.model('Course', schema);
