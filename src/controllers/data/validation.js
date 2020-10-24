@@ -1,6 +1,7 @@
 const models = require('../../mongo');
 
 const validationEntityMiddleware = (req, res, next) => {
+  console.log(req.params);
   if (models[req.params.entity] === undefined) {
     res.status(400).send({ message: "The entity " + req.params.entity + " is not known"});
   } else {
