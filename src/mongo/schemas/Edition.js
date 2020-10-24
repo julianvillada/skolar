@@ -5,7 +5,8 @@ const schema = new mongoose.Schema({
   code: String,
   active: Boolean,
   description: String,
-  startDate: Date
+  startDate: Date,
+  endDate: Date
 });
 
 const Edition = mongoose.model('Edition', schema);
